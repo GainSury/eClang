@@ -11,10 +11,10 @@ import java.util.concurrent.TimeUnit;
 import model.OutputInfo;
 
 public class EClang { 
-    public static OutputInfo output(){
-        String source = Conf.SOURUCE;
-        String dest = Conf.DEST;
-        File file=new File(Conf.DEST); 
+    public static OutputInfo output(String sourceNo){
+        String source = Conf.SOURUCE+sourceNo+Conf.LANG;
+        String dest = Conf.DEST + sourceNo+Conf.WIN;
+        File file=new File(dest); 
         if(file.exists() == true)
             file.delete();
         ProcessBuilder pb  = new ProcessBuilder(Conf.COMPILER_VERSION,source,"-o",dest);
