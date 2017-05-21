@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +28,9 @@ public class Rest {
     }
 	@RequestMapping(value={"/compileAndOutput"},method=RequestMethod.POST)
     public @ResponseBody  OutputInfo get1(@RequestBody InputInfo inputInfo) {
-        
+	    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+	   
+	    System.out.println(df.format(new Date())+":"+inputInfo.getCode_text());
 	    String sourceNo = Rest.getAndAdd().toString();
 	    
         try {
@@ -38,6 +42,7 @@ public class Rest {
             e.printStackTrace();
         }
 	    OutputInfo output = EClang.output(sourceNo);  
+        System.out.println(df.format(new Date())+":"+output.getOutput());
         return output;
     }
 	
